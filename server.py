@@ -1,5 +1,5 @@
 from bot import telegram_chatbot
-from daVinci import make_reply
+import daVinci
 bot = telegram_chatbot("E:/daVinci/config.cfg")
 
 update_id = None
@@ -15,5 +15,8 @@ while True:
             except:
                 message = None
             from_ = item["message"]["from"]["id"]
-            reply = make_reply(message)
-            bot.send_message(reply, from_)
+            reply, mode = daVinci.make_reply(message)
+            if mode == 1:
+                bot.send_image(reply, from_)
+            else: # text
+                bot.send_message(reply, from_)

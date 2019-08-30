@@ -2,4 +2,4 @@
 Telegram Chatbot
 
 Run using
->>> python server.py
+> python server.py
