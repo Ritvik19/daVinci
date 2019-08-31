@@ -1,27 +1,15 @@
-import requests
-import re
+import sys, os
+sys.path.append(os.path.join(sys.path[0], 'modules'))
 
-def get_url():
-    contents = requests.get('https://random.dog/woof.json').json()
-    url = contents['url']
-    return url
-
-def get_image_url():
-    allowed_extension = ['jpg','jpeg','png']
-    file_extension = ''
-    while file_extension not in allowed_extension:
-        url = get_url()
-        file_extension = re.search("([^.]*)$",url).group(1).lower()
-    return url
-
+import woof
 
 def make_reply(msg):
     print(msg)
     reply = None
     if msg == '/woof':
-        reply = get_image_url()
+        reply = woof.get_image_url()
         mode = 1
     elif msg is not None:
-        reply = 'Hey'
+        reply = 'Okay'
         mode = 0
     return reply, mode
