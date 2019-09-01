@@ -1,4 +1,12 @@
-import requests, bs4, wikipedia
+import requests, bs4
+import wikipedia, hastebin
+import re
+
+def haste(arg):
+    try:
+        return hastebin.post(arg)
+    except  Exception as e:
+        print(e)
 
 def wiki(arg):
     try:
@@ -10,7 +18,7 @@ def wiki(arg):
         else:
             return 'No results Found'
     except Exception as e:
-        print(e.message)
+        print(e)
 
 def cambridge(arg):
     url = 'https://dictionary.cambridge.org/dictionary/english/'+arg.lower()
@@ -37,4 +45,15 @@ def cambridge(arg):
         else:
             print('Something went wrong')
     except Exception as e:
-        print(e.message)
+        print(e)
+
+def woof():
+    try:
+        allowed_extension = ['jpg','jpeg','png']
+        file_extension = ''
+        while file_extension not in allowed_extension:
+            url = requests.get('https://random.dog/woof.json').json()['url']
+            file_extension = re.search("([^.]*)$",url).group(1).lower()
+        return url
+    except Exception as e:
+        print(e)
