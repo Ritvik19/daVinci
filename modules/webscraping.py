@@ -1,5 +1,5 @@
 import requests, bs4
-import wikipedia, hastebin
+import wikipedia, hastebin, wolframalpha
 import re
 
 def haste(arg):
@@ -57,3 +57,33 @@ def woof():
         return url
     except Exception as e:
         print(e)
+
+appId = 'APER4E-58XJGHAVAK'
+client = wolframalpha.Client(appId)
+
+def removeBrackets(variable):
+    return variable.split('(')[0]
+
+def resolveListOrDict(variable):
+    if isinstance(variable, list):
+        return variable[0]['plaintext']
+    else:
+        return variable['plaintext']
+
+def search(text=''):
+    res = client.query(text)
+    if res['@success'] == 'false':
+        return "Sorry I couldn't get this"
+    else:
+        result = ''
+        pod0 = res['pod'][0]
+        pod1 = res['pod'][1]
+        if (('definition' in pod1['@title'].lower()) or ('result' in  pod1['@title'].lower()) or (pod1.get('@primary','false') == 'true')):
+            result = resolveListOrDict(pod1['subpod'])
+            return result
+            # question = resolveListOrDict(pod0['subpod'])
+            # question = removeBrackets(question)
+        else:
+            question = resolveListOrDict(pod0['subpod'])
+            question = removeBrackets(question)
+            wiki(question)
