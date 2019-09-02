@@ -46,6 +46,7 @@ def cambridge(arg):
             print('Something went wrong')
     except Exception as e:
         print(e)
+        return 'No meanings found'
 
 def woof():
     try:
@@ -73,7 +74,7 @@ def resolveListOrDict(variable):
 def search(text=''):
     res = client.query(text)
     if res['@success'] == 'false':
-        return "Sorry I couldn't get this"
+        return "Sorry I couldn't get this.\nTry /help for know more about how I can help you"
     else:
         result = ''
         pod0 = res['pod'][0]

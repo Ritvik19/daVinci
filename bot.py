@@ -20,6 +20,11 @@ class telegram_chatbot():
         if msg is not None:
             requests.get(url)
 
+    def send_markdown(self, msg, chat_id):
+        url = self.base + "sendMessage?chat_id={}&text={}&parse_mode={}".format(chat_id, msg, 'Markdown')
+        if msg is not None:
+            requests.get(url)
+
     def send_image(self, imgsrc, chat_id):
         url = self.base + "sendPhoto?chat_id={}&photo={}".format(chat_id, imgsrc)
         if imgsrc is not None:

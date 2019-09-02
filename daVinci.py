@@ -1,17 +1,20 @@
 import sys, os
 sys.path.append(os.path.join(sys.path[0], 'modules'))
 
-import webscraping
+import webscraping, help
 
 def make_reply(msg):
-    print(msg)
     reply = None
     mode = None
     if msg is not None:
         msg = msg.split()
-        if msg[0] == '/woof':
+        print(msg)
+        if msg[0] == '/help':
+            reply = help.help()
+            mode = 0
+        elif msg[0] == '/woof':
             reply = webscraping.woof()
-            mode = 1
+            mode = 2s
         elif msg[0] == '/wiki':
             reply = webscraping.wiki(' '.join(msg[1:]))
             mode = 0
