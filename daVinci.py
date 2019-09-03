@@ -1,7 +1,7 @@
 import sys, os
 sys.path.append(os.path.join(sys.path[0], 'modules'))
 
-import webscraping, help
+import webscraping, help, chat
 
 def make_reply(msg):
     reply = None
@@ -31,6 +31,6 @@ def make_reply(msg):
             reply = webscraping.stackoverflow(' '.join(msg[1:]))
             mode = 0
         else:
-            reply = webscraping.search(' '.join(msg))
+            reply = chat.reply(' '.join(msg))
             mode = 0
     return reply, mode
