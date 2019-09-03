@@ -99,19 +99,22 @@ def cricbuzz():
         if res.status_code == requests.codes.ok:
             ressoup = bs4.BeautifulSoup(res.text, 'lxml')
             elems = ressoup.select('div.cb-col.cb-col-25.cb-mtch-blk')
-            output = ""
+            output = []
             for e in elems:
+                o = ""
                 divs = e.select('div')
                 if len(divs) == 3:
                     for ed in e.select('div')[:2]:
-                        output += ed.getText() + "\n"
+                        o += ed.getText() + "\n"
                 elif len(divs) == 7:
-                    output += divs[1].getText() + " "
-                    output += divs[2].getText() + "\n"
-                    output += divs[4].getText() + " "
-                    output += divs[5].getText() + "\n"
-                    output += divs[6].getText() + "\n"
-                output += url+e.select('a')[0].get('href')+"\n"
+                    o += divs[1].getText() + " "
+                    o += divs[2].getText() + "\n"
+                    o += divs[4].getText() + " "
+                    o += divs[5].getText() + "\n"
+                    o += divs[6].getText() + "\n"
+                o += url+e.select('a')[0].get('href')
+                output.append(o)
+            output = '\n'.join(list(set(output)))
             return output
         else:
             print('Something went wrong')
