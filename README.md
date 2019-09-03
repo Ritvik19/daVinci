@@ -5,6 +5,7 @@ Run using
 > python server.py
 
 Additional Bot Commands:
+* `/code query`: Query stackoverflow and get results
 * `/cric`: Get Live Cricket Scores
 * `/dict query`: Query cambridge dictionary and get its definition
 * `/hastebin text`: Send the text to hastebin and get the link

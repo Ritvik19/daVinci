@@ -121,3 +121,20 @@ def cricbuzz():
     except Exception as e:
         print(e)
         return "Scores couldn't be fetched"
+
+def stackoverflow(query):
+    url_query = 'https://stackoverflow.com/search?q='+query
+    try:
+        res = requests.get(url_query)
+        if res.status_code == requests.codes.ok:
+            ressoup = bs4.BeautifulSoup(res.text, 'lxml')
+            elems = ressoup.select('.question-summary')
+            results = ""
+            for i,e in enumerate(elems):
+                l = 'https://stackoverflow.com'+re.findall(r'href="(.*?)"', str(list(e.children)[3]))[0]
+                t = re.findall(r'<a .*? title="(.*?)">', str(list(e.children)[3]))[0]
+                results += str(i+1)+'\n'+t+'\n'+l+'\n\n'
+        return results
+    except Exception as e:
+        print(e)
+        return "Scores couldn't be fetched"

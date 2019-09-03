@@ -27,6 +27,9 @@ def make_reply(msg):
         elif msg[0] == '/hastebin':
             reply = webscraping.haste(' '.join(msg[1:]))
             mode = 0
+        elif msg[0] == '/code':
+            reply = webscraping.stackoverflow(' '.join(msg[1:]))
+            mode = 0
         else:
             reply = webscraping.search(' '.join(msg))
             mode = 0
