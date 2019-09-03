@@ -14,7 +14,10 @@ def make_reply(msg):
             mode = 0
         elif msg[0] == '/woof':
             reply = webscraping.woof()
-            mode = 2s
+            mode = 2
+        elif msg[0] == '/cric':
+            reply = webscraping.cricbuzz()
+            mode = 0
         elif msg[0] == '/wiki':
             reply = webscraping.wiki(' '.join(msg[1:]))
             mode = 0
