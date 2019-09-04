@@ -1,4 +1,4 @@
-import requests, bs4
+import requests, bs4, json
 import wikipedia, hastebin
 import re
 
@@ -46,7 +46,6 @@ def cambridge(arg):
             print('Something went wrong')
     except Exception as e:
         print(e)
-        return 'No meanings found'
 
 def woof():
     try:
@@ -90,7 +89,6 @@ def cricbuzz():
             print('Something went wrong')
     except Exception as e:
         print(e)
-        return "Scores couldn't be fetched"
 
 def stackoverflow(query):
     url_query = 'https://stackoverflow.com/search?q='+query
@@ -107,4 +105,28 @@ def stackoverflow(query):
         return results
     except Exception as e:
         print(e)
-        return "Scores couldn't be fetched"
+
+def apod():
+    with open('E:/API-Credentials/NASA.txt') as f:
+        key = f.read().strip()
+    url = 'https://api.nasa.gov/planetary/apod?api_key='+key
+    res = requests.get(url)
+    if res.status_code == requests.codes.ok:
+        data = json.loads(res.text)
+        reply_msg = ''
+        reply_msg += data['date'] + '\n'
+        reply_msg += data['title'] + '\n\n'
+        reply_msg += data['explanation'] + '\n'
+        media_url = data['url']
+        if data['media_type'] == 'image':
+            try:
+                reply_msg += 'View: '+data['hdurl']
+            except:
+                print("No HD URL")
+            reply = (reply_msg, media_url)
+            return reply
+        else:
+            reply_msg += 'View: '+data['url']
+            return reply_msg
+    else:
+        print('Something went wrong')

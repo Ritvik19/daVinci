@@ -16,9 +16,14 @@ while True:
                 message = None
             from_ = item["message"]["from"]["id"]
             reply, mode = daVinci.make_reply(message)
-            if mode == 2:
-                bot.send_image(reply, from_)
+            if reply is None:
+                bot.send_message('Something went wrong')
+            if mode == 0:
+                bot.send_message(reply, from_)
             elif mode == 1:
                 bot.send_markdown(reply, from_)
-            else:
-                bot.send_message(reply, from_)
+            elif mode == 2:
+                bot.send_image(reply, from_)
+            elif mode == 3:
+                bot.send_image(reply[1], from_)
+                bot.send_message(reply[0], from_)

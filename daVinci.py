@@ -30,6 +30,9 @@ def make_reply(msg):
         elif msg[0] == '/code':
             reply = webscraping.stackoverflow(' '.join(msg[1:]))
             mode = 0
+        elif msg[0] == '/apod':
+            reply = webscraping.apod()
+            mode = 3 if len(reply) == 2 else 0
         else:
             reply = chat.reply(' '.join(msg))
             mode = 0
