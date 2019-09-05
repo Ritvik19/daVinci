@@ -130,3 +130,6 @@ def apod():
             return reply_msg
     else:
         print('Something went wrong')
+
+def upsplash():
+    return requests.get('https://source.unsplash.com/random').url

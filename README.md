@@ -6,6 +6,7 @@ Run using
 
 Additional Bot Commands:
 * `/apod`: View the Astronomy Picture of the Day
+* `/click`: Get a random picture
 * `/code query`: Query stackoverflow and get results
 * `/cric`: Get Live Cricket Scores
 * `/dict query`: Query cambridge dictionary and get its definition
