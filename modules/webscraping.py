@@ -131,5 +131,5 @@ def apod():
     else:
         print('Something went wrong')
 
-def upsplash():
-    return requests.get('https://source.unsplash.com/random').url
+def upsplash(query):
+    return requests.get(f'https://source.unsplash.com/featured/?{query}').url

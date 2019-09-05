@@ -33,8 +33,8 @@ def make_reply(msg):
         elif msg[0] == '/apod':
             reply = webscraping.apod()
             mode = 3 if len(reply) == 2 else 0
-        elif msg[0] == '/click':
-            reply = webscraping.upsplash()
+        elif msg[0] == '/pic':
+            reply = webscraping.upsplash(' '.join(msg[1:]))
             mode = 2
         else:
             reply = chat.reply(' '.join(msg))
