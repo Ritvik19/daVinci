@@ -107,29 +107,50 @@ def stackoverflow(query):
         print(e)
 
 def apod():
-    with open('E:/API-Credentials/NASA.txt') as f:
-        key = f.read().strip()
-    url = 'https://api.nasa.gov/planetary/apod?api_key='+key
-    res = requests.get(url)
-    if res.status_code == requests.codes.ok:
-        data = json.loads(res.text)
-        reply_msg = ''
-        reply_msg += data['date'] + '\n'
-        reply_msg += data['title'] + '\n\n'
-        reply_msg += data['explanation'] + '\n'
-        media_url = data['url']
-        if data['media_type'] == 'image':
-            try:
-                reply_msg += 'View: '+data['hdurl']
-            except:
-                print("No HD URL")
-            reply = (reply_msg, media_url)
-            return reply
+    try:
+        with open('E:/API-Credentials/NASA.txt') as f:
+            key = f.read().strip()
+        url = 'https://api.nasa.gov/planetary/apod?api_key='+key
+        res = requests.get(url)
+        if res.status_code == requests.codes.ok:
+            data = json.loads(res.text)
+            reply_msg = ''
+            reply_msg += data['date'] + '\n'
+            reply_msg += data['title'] + '\n\n'
+            reply_msg += data['explanation'] + '\n'
+            media_url = data['url']
+            if data['media_type'] == 'image':
+                try:
+                    reply_msg += 'View: '+data['hdurl']
+                except:
+                    print("No HD URL")
+                reply = (reply_msg, media_url)
+                return reply
+            else:
+                reply_msg += 'View: '+data['url']
+                return reply_msg
         else:
-            reply_msg += 'View: '+data['url']
-            return reply_msg
-    else:
-        print('Something went wrong')
+            print('Something went wrong')
+    except Exception as e:
+        print(e)
 
 def upsplash(query):
     return requests.get(f'https://source.unsplash.com/featured/?{query}').url
+
+def theysaidso():
+    try:
+        url = 'http://quotes.rest/qod.json'
+        res = requests.get(url)
+        reply_msg = ""
+        if res.status_code == requests.codes.ok:
+            data = json.loads(res.text)
+            reply_msg += data['contents']['quotes'][0]['title'] +"\n"
+            reply_msg += data['contents']['quotes'][0]['date'] +"\n\n"
+            reply_msg += data['contents']['quotes'][0]['quote'] +"\n"
+            reply_msg += "-" + data['contents']['quotes'][0]['author']
+            media_url = data['contents']['quotes'][0]['background']
+            return (reply_msg, media_url)
+        else:
+            print('Something went wrong')
+    except Exception as e:
+        print(e)

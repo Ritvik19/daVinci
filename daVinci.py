@@ -36,6 +36,9 @@ def make_reply(msg):
         elif msg[0] == '/pic':
             reply = webscraping.upsplash(' '.join(msg[1:]))
             mode = 2
+        elif msg[0] == '/qod':
+            reply = webscraping.theysaidso()
+            mode = 3
         else:
             reply = chat.reply(' '.join(msg))
             mode = 0
