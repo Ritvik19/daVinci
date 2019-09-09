@@ -39,6 +39,9 @@ def make_reply(msg):
         elif msg[0] == '/qod':
             reply = webscraping.theysaidso()
             mode = 3
+        elif msg[0] == '/weather':
+            reply = webscraping.weather(' '.join(msg[1:]))
+            mode = 0
         else:
             reply = chat.reply(' '.join(msg))
             mode = 0

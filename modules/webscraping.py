@@ -154,3 +154,26 @@ def theysaidso():
             print('Something went wrong')
     except Exception as e:
         print(e)
+
+def weather(city):
+    try:
+        with open('E:/API-Credentials/Weather.txt') as f:
+            API_KEY = f.read().strip()
+        url = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&APPID='+API_KEY
+        res = requests.get(url)
+        if res.status_code == requests.codes.ok:
+            data = res.json()
+            output = data['name'] + '\n'
+            output += f"Longitude: {data['coord']['lon']}" + '\n'
+            output += f"Latitude : {data['coord']['lat']}" + '\n'
+            output += f"Weather:\n\t{data['weather'][0]['main']}\n\t{data['weather'][0]['description']}" + '\n'
+            output += f"Temperature: {data['main']['temp'] - 273.15:.2f} degree celsius" + '\n'
+            output += f"Pressure   : {data['main']['pressure']} hecto pascal" + '\n'
+            output += f"Humidity   : {data['main']['humidity']} %" + '\n'
+            output += f"Wind Speed : {data['wind']['speed']} m/sec" + '\n'
+            output += f"Wind Direc : {data['wind']['deg']}"
+            return output
+        else:
+            print('Something went wrong')
+    except Exception as e:
+        print(e)
