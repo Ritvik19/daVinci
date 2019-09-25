@@ -1,5 +1,5 @@
 import requests, bs4, json
-import wikipedia, hastebin
+import wikipedia, hastebin, pdfkit
 import re
 
 def haste(arg):
@@ -173,6 +173,20 @@ def weather(city):
             output += f"Wind Speed : {data['wind']['speed']} m/sec" + '\n'
             output += f"Wind Direc : {data['wind']['deg']}"
             return output
+        else:
+            print('Something went wrong')
+    except Exception as e:
+        print(e)
+
+def medium(x):
+    try:
+        res = requests.get(x)
+        if res.status_code == requests.codes.ok:
+            ressoup = bs4.BeautifulSoup(res.text, 'lxml')
+            elems = ressoup.select('title')
+            name = elems[0].getText()
+            pdfkit.from_url(x, 'E:\\Articles\\'+name+'.pdf')
+            return f'Saved: {name}'
         else:
             print('Something went wrong')
     except Exception as e:

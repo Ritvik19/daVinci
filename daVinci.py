@@ -1,7 +1,7 @@
 import sys, os
 sys.path.append(os.path.join(sys.path[0], 'modules'))
 
-import webscraping, help, chat
+import webscraping, help, chat, core, datascience
 
 def make_reply(msg):
     reply = None
@@ -41,6 +41,15 @@ def make_reply(msg):
             mode = 3
         elif msg[0] == '/weather':
             reply = webscraping.weather(' '.join(msg[1:]))
+            mode = 0
+        elif msg[0] == '/eval':
+            reply = core.pyeval(' '.join(msg[1:]))
+            mode = 0
+        elif msg[0] == '/medium':
+            reply = webscraping.medium(' '.join(msg[1:]))
+            mode = 0
+        elif msg[0] == '/inspyre':
+            reply = datascience.inspyre(' '.join(msg[1:]))
             mode = 0
         else:
             reply = chat.reply(' '.join(msg))
