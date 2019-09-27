@@ -179,6 +179,8 @@ def weather(city):
         print(e)
 
 def medium(x):
+    x = re.findall(r'''((http[s]?://)[^ <>'"{}|\^`[\]]*)''', x)[0][0]
+    print(x)
     try:
         res = requests.get(x)
         if res.status_code == requests.codes.ok:

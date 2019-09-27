@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, re
 sys.path.append(os.path.join(sys.path[0], 'modules'))
 
 import webscraping, help, chat, core, datascience
@@ -45,7 +45,7 @@ def make_reply(msg):
         elif msg[0] == '/eval':
             reply = core.pyeval(' '.join(msg[1:]))
             mode = 0
-        elif msg[0] == '/medium':
+        elif msg[0] == '/medium' or re.search('https://link\.medium\.com/.*', ' '.join(msg)):
             reply = webscraping.medium(' '.join(msg[1:]))
             mode = 0
         elif msg[0] == '/inspyre':
