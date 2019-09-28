@@ -28,3 +28,6 @@ while True:
                 elif mode == 3:
                     bot.send_image(reply[1], from_)
                     bot.send_message(reply[0], from_)
+                elif mode == 4:
+                    bot.send_message(reply[0], from_)
+                    bot.send_markup(reply[1], from_)

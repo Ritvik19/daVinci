@@ -45,7 +45,7 @@ def make_reply(msg):
         elif msg[0] == '/eval':
             reply = core.pyeval(' '.join(msg[1:]))
             mode = 0
-        elif msg[0] == '/medium' or re.search('https://link\.medium\.com/.*', ' '.join(msg)):
+        elif msg[0] == '/medium' or re.search(r'https://link\.medium\.com/.*', ' '.join(msg)):
             reply = webscraping.medium(' '.join(msg[1:]))
             mode = 0
         elif msg[0] == '/inspyre':
