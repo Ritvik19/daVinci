@@ -179,7 +179,10 @@ def weather(city):
         print(e)
 
 def medium(x):
-    x = re.findall(r'https://link\.medium\.com/.*', x)[0]
+    try:
+        x = re.findall(r'https://link\.medium\.com/.*', x)[0]
+    except:
+        pass
     try:
         res = requests.get(x)
         if res.status_code == requests.codes.ok:
